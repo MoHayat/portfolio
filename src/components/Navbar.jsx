@@ -56,7 +56,7 @@ const Navbar = () => {
                         ))}
                     </ul>
                     <motion.a
-                        href="/mo_resume.pdf"
+                        href={`${import.meta.env.BASE_URL}mo_resume.pdf`}
                         target="_blank"
                         rel="noopener noreferrer"
                         initial={{ opacity: 0, y: -10 }}
@@ -98,7 +98,7 @@ const Navbar = () => {
                         ))}
                         <li>
                             <a
-                                href="/mo_resume.pdf"
+                                href={`${import.meta.env.BASE_URL}mo_resume.pdf`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="px-8 py-3 border border-neon-green text-neon-green font-mono rounded hover:bg-neon-green/10 transition-colors"
