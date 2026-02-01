@@ -1,165 +1,66 @@
 @import "tailwindcss";
 
 @theme {
-  --color-dark-bg: #0d0d0d;
-  --color-dark-surface: #1a1a1a;
-  --color-dark-card: #242424;
-  --color-neon-green: #00ff88;
-  --color-neon-purple: #b388ff;
-  --color-neon-blue: #00d4ff;
-  --color-neon-yellow: #ffeb3b;
-  --color-neon-pink: #ff6b9d;
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #a0a0a0;
-  --color-border: #333333;
+  /* Oxocarbon Theme Colors */
+  --color-bg: #161616;
+  --color-bg-light: #262626;
+  --color-fg: #f2f2f2;
+  --color-comment: #525252;
+  
+  --color-cyan: #3ddbd9;
+  --color-green: #42be65;
+  --color-pink: #ff7eb6;
+  --color-purple: #be95ff;
+  --color-blue: #78a9ff;
+  --color-yellow: #ffe97b;
+  --color-orange: #ee5396;
+  --color-grey: #676767;
 
-  --font-sans: 'Space Grotesk', system-ui, sans-serif;
+  /* Fonts */
   --font-mono: 'Space Mono', 'JetBrains Mono', monospace;
-  --font-pixel: 'Press Start 2P', monospace;
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-
   body {
-    @apply bg-dark-bg text-text-primary font-sans antialiased;
-    line-height: 1.7;
+    @apply bg-bg text-fg font-mono antialiased;
+    overflow-x: hidden;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply text-text-primary font-bold;
-    letter-spacing: -0.02em;
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
   }
 
-  ::selection {
-    @apply bg-neon-green text-dark-bg;
-  }
-}
-
-/* Pixel Art Border */
-.pixel-border {
-  box-shadow:
-    4px 0 0 0 currentColor,
-    -4px 0 0 0 currentColor,
-    0 4px 0 0 currentColor,
-    0 -4px 0 0 currentColor;
-}
-
-/* Glowing text effect */
-.glow-text {
-  text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
-}
-
-/* Scanline effect */
-.scanlines::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: repeating-linear-gradient(0deg,
-      rgba(0, 0, 0, 0.15),
-      rgba(0, 0, 0, 0.15) 1px,
-      transparent 1px,
-      transparent 2px);
-  pointer-events: none;
-  z-index: 10;
-}
-
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, #00ff88 0%, #00d4ff 50%, #b388ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Animated gradient background */
-@keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
+  ::-webkit-scrollbar-track {
+    @apply bg-bg;
   }
 
-  50% {
-    background-position: 100% 50%;
+  ::-webkit-scrollbar-thumb {
+    @apply bg-bg-light rounded;
+    border: 2px solid var(--color-bg);
   }
 
-  100% {
-    background-position: 0% 50%;
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-comment;
   }
 }
 
-.animated-gradient {
-  background: linear-gradient(-45deg, #0d0d0d, #1a1a1a, #0d0d0d, #242424);
-  background-size: 400% 400%;
-  animation: gradient-shift 15s ease infinite;
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+  
+  .terminal-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1.2em;
+    background-color: var(--color-fg);
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+  }
 }
 
-/* Pixel grid background */
-.pixel-grid {
-  background-image:
-    linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
-  background-size: 20px 20px;
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  @apply bg-dark-bg;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-neon-green/30 rounded;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-neon-green/50;
-}
-
-/* Blinking cursor animation */
 @keyframes blink {
-
-  0%,
-  50% {
-    opacity: 1;
-  }
-
-  51%,
-  100% {
-    opacity: 0;
-  }
-}
-
-.cursor-blink::after {
-  content: "_";
-  animation: blink 1s infinite;
-}
-
-/* Float animation */
-@keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
